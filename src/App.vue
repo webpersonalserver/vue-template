@@ -1,28 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <keep-alive :include="includeRouterName">
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  data () {
+    return {
+      includeRouterName: []
+    }
+  },
+  created () {
+    // 处理路由模块是否需要缓存,并记录存储
+    const routes = this.$router.options.routes;
+    routes.forEach(route => {
+      if (route.meta && route.meta.isKeepAlive) {
+        this.includeRouterName.push(route.name);
+      }
+    });
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '@/assets/style/common.scss';
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
