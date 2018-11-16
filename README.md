@@ -24,6 +24,7 @@ vue-template
                       |--------style                      样式资源
                               |-------common.scss             公共样式文件
           |-----------components                      开发组件文件（页面）
+                      |--------template.vue               页面文件模板
           |-----------router                          路由模块
           |-----------vuex                            vuex数据状态管理
                       |--------getters
